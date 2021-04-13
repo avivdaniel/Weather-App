@@ -1,4 +1,5 @@
 const HtmlPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const { resolve } = require('path');
 
@@ -41,6 +42,7 @@ module.exports = {
   },
 
   plugins: [
+    new Dotenv(),
     new HtmlPlugin({
       title: 'React, Tailwind and Webpack 5 Boilerplate',
       favicon: './src/assets/favicon.svg',

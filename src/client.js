@@ -1,5 +1,4 @@
 import axios from 'axios';
-
-const baseURL = `${process.env.BASE_URL}`;
+import { apiKey, baseURL } from '@/config';
 
 export default axios.create({ baseURL });

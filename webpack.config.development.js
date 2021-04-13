@@ -17,6 +17,5 @@ module.exports = merge(config, {
       },
     ],
   },
-
   plugins: [new Dotenv()],
 });

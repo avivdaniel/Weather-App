@@ -67,7 +67,7 @@ module.exports = merge(config, {
   plugins: [
     new CleanWebpackPlugin(),
 
-    new EnvironmentPlugin(['BASE_URL']),
+    new EnvironmentPlugin(['BASE_URL', 'ACCUWEATHER_API_KEY']),
 
     new MiniCssExtractPlugin({
       filename: 'assets/css/[name].[contenthash].css',
