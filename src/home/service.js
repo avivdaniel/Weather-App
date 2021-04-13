@@ -1,6 +1,8 @@
-import client from '@/client.js';
+import accuWeatherApi from '@/client.js';
 
-export const getPosts = async () => {
-  const { data } = await client.get('/posts');
+import {apiKey} from '@/config';
+
+export const getCityOptions = async (query) => {
+  const { data } = await accuWeatherApi.get(`/locations/v1/cities/autocomplete?apikey=${apiKey}=${query}`)
   return data;
-};
+}

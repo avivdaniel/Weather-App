@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select'
+import { getCityOptions } from '@/services/services';
 
-const SearchBar = () => {
-  const [value, setValue] = useState('');
-  const [cityOptions, setCityOptions] = useState([]);
-
+const SearchBar = ({query, setQuery, cityOptions, setCityOptions}) => {
 
   return (
     <Select
-      onInputChange={(value) => setValue(value)}
+      onInputChange={(query) => setQuery(query)}
     />
   );
 };
