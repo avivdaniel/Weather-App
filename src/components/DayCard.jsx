@@ -21,10 +21,6 @@ const DayCard = ({date = {}, day = {}, night = {}, temperature = {}, ...props}) 
   const { Maximum: {Value: maxTemp}, Minimum: {Value: minTemp}} = temperature;
   const { IconPhrase: description} = day;
 
-  useEffect(()=> {
-    console.log(date)
-  }, [])
-
   return (
     <div className="space-y-4 bg-green-300">
       <h3>

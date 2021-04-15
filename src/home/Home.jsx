@@ -8,39 +8,10 @@ import SearchBar from '@/components/SearchBar';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const cityForecast = useSelector((state)=> state.cityForecast)
-
-  const [query, setQuery] = useState('');
-  const [cityOptions, setCityOptions] = useState([]);
-
-  useEffect(()=> {
-    dispatch(getFiveDayWeatherAsync({
-      locationKey: '215854'
-    }))
-  }, [dispatch]);
-
-  useEffect(()=> {
-    (async ()=> {
-      try {
-        if (query.length > 0) {
-          const cityOptions = await getCityOptions(query);
-          console.log({cityOptions})
-        }
-      } catch (err) {
-        console.error(err);
-      }
-
-    })();
-  }, [query]);
-
 
   return (
     <div className="prose prose-blue lg:prose-xl">
-      <SearchBar query={query}
-                 setQuery={setQuery}
-                 cityOptions={cityOptions}
-                 setCityOptions={setCityOptions}
-      />
+      <SearchBar />
       <DaysCardList/>
     </div>
   );
