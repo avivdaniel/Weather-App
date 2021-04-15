@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import DayCard from '@/components/DayCard';
+
 const DaysCardList = () => {
   const cityForecast = useSelector((state)=> state.cityForecast.days)
   const cityName = useSelector((state)=> state.cityForecast.localizedName)
