@@ -10,7 +10,6 @@ module.exports = merge(config, {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
-
       {
         test: /\.(png|jpe?g|ico|gif|woff2?|ttf|eot)(\?-.*)?$/,
         loader: 'url-loader',

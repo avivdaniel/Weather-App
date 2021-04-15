@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   purge: ['./src/**/**.{js,jsx}'],
@@ -8,6 +9,10 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        'peach': '#FFAA85',
+        'red-wine': '#B3315F'
+      }
     },
   },
   variants: {
@@ -24,5 +29,12 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
+    plugin(({addUtilities, theme})=> {
+      addUtilities({
+        '.bg-app': {
+          'background-image': `linear-gradient( 135deg, ${theme('colors.peach')} 10%, ${theme('colors.red-wine')} 100%)`
+        }
+      }, ['responsive', 'hover'])
+    })
   ],
 };

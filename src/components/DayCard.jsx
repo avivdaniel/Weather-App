@@ -22,11 +22,10 @@ const DayCard = ({date = {}, day = {}, night = {}, temperature = {}, ...props}) 
   const { IconPhrase: description} = day;
 
   return (
-    <div className="space-y-4 bg-green-300">
+    <div className="text-white p-6 border border-white rounded-xl space-y-4">
       <h3>
          {formatDayOfWeek(date)}
       </h3>
-
 
       <span className="block">date: {date}</span>
       <span className="block">{description}</span>
