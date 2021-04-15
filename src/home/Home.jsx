@@ -10,7 +10,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="prose prose-blue lg:prose-xl">
+    <div className="">
       <SearchBar />
       <DaysCardList/>
     </div>

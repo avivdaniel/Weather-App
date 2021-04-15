@@ -37,7 +37,8 @@ useEffect(()=> {
     setSelectedCity({label:defalutCityOption?.LocalizedName, value: defalutCityOption?.Key})
 
     dispatch(getFiveDayWeatherAsync({
-      locationKey: defalutCityOption?.Key
+      locationKey: defalutCityOption?.Key,
+      localizedName: defalutCityOption?.LocalizedName
     }))
   })();
 }, []);
