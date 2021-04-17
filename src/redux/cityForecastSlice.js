@@ -195,7 +195,7 @@ const cityForecastSlice = createSlice({
       };
     }
   }
-})
+});
 
 export default cityForecastSlice.reducer;
 
