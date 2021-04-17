@@ -5,7 +5,7 @@ import SearchBar from '@/components/SearchBar';
 
 const Home = () => {
   return (
-    <div className="">
+    <div className="min-h-screen flex flex-col">
       <SearchBar />
       <DaysCardList/>
     </div>

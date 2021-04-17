@@ -8,19 +8,19 @@ const DaysCardList = () => {
   const {localizedName, locationKey}  = useSelector((state)=> state.cityForecast);
 
   return (
-    <div className="max-w-screen-md lg:max-w-screen-lg mx-auto space-y-6">
+    <div className="flex-1 flex flex-col justify-between">
+
+      <div className="current-condition p-4 flex-1 relative">
       <h2 className="font-bold">{localizedName ? `The city :${localizedName}` : 'Welcome!'}</h2>
-
       <AddToFavoritesBtn localizedName={localizedName} locationKey={locationKey}/>
+      </div>
 
-      {cityForecast.length > 0 && cityForecast.map(({Day, Night, Date, Temperature, ...rest}, i)=> {
-        return <DayCard key={i}
-                        date={Date}
-                        day={Day}
-                        temperature={Temperature}
-                        night={Night}
-                        {...rest}/>
-      })}
+<div className="bg-gray-800 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 xl:py-4">
+  {cityForecast.length > 0 && cityForecast.map((day, i)=> {
+    return <DayCard key={i}
+                    day={day}/>
+  })}
+</div>
     </div>
   );
 };

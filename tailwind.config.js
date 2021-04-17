@@ -10,8 +10,11 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        'peach': '#FFAA85',
-        'red-wine': '#B3315F'
+        'light-blue': '#90F7EC',
+        'dark-blue': '#32CCBC'
+      },
+      animation: {
+        'bounce': 'bounce 1s 1;'
       }
     },
   },
@@ -23,6 +26,7 @@ module.exports = {
       opacity: ['group-focus'],
       textColor: ['group-focus', 'active'],
       textDecoration: ['group-focus'],
+      animation: ['hover', 'focus'],
     },
   },
   plugins: [
@@ -32,7 +36,7 @@ module.exports = {
     plugin(({addUtilities, theme})=> {
       addUtilities({
         '.bg-app': {
-          'background-image': `linear-gradient( 135deg, ${theme('colors.peach')} 10%, ${theme('colors.red-wine')} 100%)`
+          'background-image': `linear-gradient( 135deg, ${theme('colors.light-blue')} 10%, ${theme('colors.dark-blue')} 100%)`
         }
       }, ['responsive', 'hover'])
     })

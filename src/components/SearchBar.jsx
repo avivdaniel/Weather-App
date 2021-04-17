@@ -17,22 +17,22 @@ const SearchBar = ({}) => {
 
 useEffect(()=> {
   (async () => {
-    const [defalutCityOption] = await getCityOptions(DEFAULT_CITY);
+    // const [defalutCityOption] = await getCityOptions(DEFAULT_CITY);
 
-    // let defalutCityOption = {
-    //   "Version": 1,
-    //   "Key": "215854",
-    //   "Type": "City",
-    //   "Rank": 31,
-    //   "LocalizedName": "Tel Aviv",
-    //   "Country": {
-    //   "ID": "IL",
-    //     "LocalizedName": "Israel"
-    // },
-    //   "AdministrativeArea": {
-    //   "ID": "TA",
-    //     "LocalizedName": "Tel Aviv"
-    // }}
+    let defalutCityOption = {
+      "Version": 1,
+      "Key": "215854",
+      "Type": "City",
+      "Rank": 31,
+      "LocalizedName": "Tel Aviv",
+      "Country": {
+      "ID": "IL",
+        "LocalizedName": "Israel"
+    },
+      "AdministrativeArea": {
+      "ID": "TA",
+        "LocalizedName": "Tel Aviv"
+    }}
 
     setSelectedCity({label:defalutCityOption?.LocalizedName, value: defalutCityOption?.Key})
 
@@ -219,6 +219,7 @@ const handleChange = selectedCityOption => {
     <AsyncSelect
       cacheOptions
       value={selectedCity}
+      className="p-4"
       placeholder='Type something...'
       loadOptions={debounceFetchCityOptions}
       onChange={handleChange}
