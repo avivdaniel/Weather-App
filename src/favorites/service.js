@@ -1,3 +1,6 @@
+import accuWeatherApi from '../client.js';
+import {apiKey} from '@/config';
+
 export const loadFavorites = () => {
   try {
     const serializedState = localStorage.getItem('favorites');
@@ -7,5 +10,14 @@ export const loadFavorites = () => {
     return JSON.parse(serializedState);
   } catch (err) {
     return undefined;
+  }
+}
+
+export const getCurrentWeather = async (locationKey) => {
+  try {
+    const {data} = await accuWeatherApi.get(`/currentconditions/v1/${locationKey}?apikey=${apiKey}&details=true`);
+    return data;
+  } catch (err) {
+    console.error(err);
   }
 }
