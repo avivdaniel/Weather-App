@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {addToFavorites, removeFromFavorites} from '@/redux/favoritesSlice';
 import { cn } from '@/utils';
 
-const AddToFavoritesBtn = () => {
+const AddToFavoritesBtn = ({locationKey, localizedName}) => {
   const dispatch = useDispatch();
-  const { locationKey , localizedName}  = useSelector(state => state.cityForecast);
   const favorites = useSelector(state => state.favorites);
 
   const isFavorite = () => {
