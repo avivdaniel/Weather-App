@@ -30,13 +30,13 @@ const FavoriteCard = ({localizedName, locationKey}) => {
   }, [locationKey]);
 
   return (
-    <div className="p-4 border border-white shadow-lg" onClick={expandCityWeather}>
-      <AddToFavoritesBtn localizedName={localizedName} locationKey={locationKey}/>
+    <li className="flex flex-col justify-center items-center space-y-4 text-white p-4 rounded-xl shadow-lg shadow-lg bg-gray-800 list-none h-52" onClick={expandCityWeather}>
       <p>{localizedName}</p>
       <Icon number={currentCondition?.WeatherIcon}/>
       <p>{currentCondition?.WeatherText}</p>
       <p>{currentCondition?.Temperature?.Metric?.Value}</p>
-    </div>
+      <AddToFavoritesBtn localizedName={localizedName} locationKey={locationKey}/>
+    </li>
   );
 };
 

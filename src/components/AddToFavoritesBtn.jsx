@@ -4,7 +4,7 @@ import {addToFavorites, removeFromFavorites} from '@/redux/favoritesSlice';
 import { cn } from '@/utils';
 import Icon from '@/components/Icon';
 
-const AddToFavoritesBtn = ({locationKey, localizedName}) => {
+const AddToFavoritesBtn = ({locationKey, localizedName, className}) => {
   const dispatch = useDispatch();
   const favorites = useSelector(state => state.favorites);
   const [animateBounce, setAnimateBounce]= useState(false);
@@ -29,8 +29,9 @@ const AddToFavoritesBtn = ({locationKey, localizedName}) => {
     <button
       className=
         {cn(
-        'absolute bottom-2 right-2 h-10 w-10 focus:outline-none',
-        animateBounce ? 'animate-bounce': ''
+        'h-10 w-10 xl:h-20 xl:w-20 focus:outline-none',
+        animateBounce ? 'animate-bounce': '',
+          className,
         )}
       onAnimationEnd={()=> setAnimateBounce(false)}
       onClick={handleFavoriteClick}>

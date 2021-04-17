@@ -4,7 +4,7 @@ const Layout = ({ children }) => (
   <>
     <Navigation />
 
-    <div className="bg-app">{children}</div>
+    <div className="min-h-screen bg-app">{children}</div>
   </>
 );
 
