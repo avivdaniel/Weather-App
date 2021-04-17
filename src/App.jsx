@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Switch, Route } from 'react-router-dom';
 
 import Loading from '@/components/Loading.jsx';
 import routes from '@/routes.jsx';
@@ -16,6 +16,7 @@ const App = () => (
           {routes.map((props, index) => (
             <Route key={index} {...props} />
           ))}
+          <Redirect to="/"/>
         </Switch>
       </Suspense>
     </Layout>
