@@ -1,7 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
 import cityForecastReducer from './cityForecastSlice';
 import favoritesReducer from './favoritesSlice';
-import {loadFavorites, saveFavorites} from '@/favorites/service';
+import {loadFavorites} from '@/favorites/service';
 
 
 const reducer = {
