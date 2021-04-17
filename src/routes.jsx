@@ -1,3 +1,3 @@
 import * as Home from './home/route.jsx';
-
-export default [Home];
+import * as Favorites from './favorites/route.jsx';
+export default [Home, Favorites];

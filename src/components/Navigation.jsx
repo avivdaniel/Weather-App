@@ -35,7 +35,7 @@ const Navigation = () => {
             </div>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
-                {routes.map(({ title, path, exact }) => (
+                {routes.map(({ title, path, exact}) => (
                   <MenuItem to={path} exact={exact}>
                     {title}
                   </MenuItem>

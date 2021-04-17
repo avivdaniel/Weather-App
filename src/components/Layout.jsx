@@ -4,7 +4,7 @@ const Layout = ({ children }) => (
   <>
     <Navigation />
 
-    <div className="max-w-screen-lg mx-auto p-4 bg-app">{children}</div>
+    <div className="min-h-screen max-w-screen-lg mx-auto p-4 bg-app">{children}</div>
   </>
 );
 

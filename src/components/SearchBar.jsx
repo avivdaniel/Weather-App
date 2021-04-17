@@ -3,7 +3,6 @@ import AsyncSelect from 'react-select/async';
 import debounce from 'lodash.debounce';
 import {useDispatch} from 'react-redux';
 import { getFiveDayWeatherAsync } from '@/redux/cityForecastSlice';
-import { getCityOptions } from '@/home/service';
 
 const DEFAULT_CITY = 'Tel Aviv';
 
