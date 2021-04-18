@@ -24,7 +24,6 @@ const FavoriteCard = ({localizedName, locationKey}) => {
   useEffect(()=> {
     (async () => {
       const [currentCondition] = await getCurrentWeather(locationKey);
-      console.log(currentCondition);
       setCurrentCondition(currentCondition);
     })();
   }, [locationKey]);

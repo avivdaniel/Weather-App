@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Icon from '@/components/Icon';
 
 const weekDayList = [
@@ -18,9 +18,6 @@ const DayCard = ({day: {Temperature:temperature, Day:day, Date:date, ...props}})
     const weekDay = new Date(date).getDay();
     return weekDayList[weekDay];
   }
-  useEffect(()=> {
-    console.log(date)
-  }, [])
 
   // const { Maximum: {Value: maxTemp}, Minimum: {Value: minTemp}} = temperature;
   const { IconPhrase: description, Icon: dayIconNumber } = day;
