@@ -4,6 +4,7 @@ import DayCard from '@/components/DayCard';
 import AddToFavoritesBtn from '@/components/AddToFavoritesBtn';
 import { getCurrentWeatherAsync } from '@/redux/cityForecastSlice';
 import TodayCard from '@/components/TodayCard';
+import Loading from '@/components/Loading';
 
 const DaysCardList = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const DaysCardList = () => {
     localizedName,
     locationKey,
     current,
+    isLoading,
     days: cityFiveDaysForecast
   } = useSelector((state)=> state.cityForecast);
 
@@ -22,29 +24,32 @@ const DaysCardList = () => {
   },[dispatch,locationKey]);
 
   return (
-    <div className="relative flex-1 flex flex-col justify-between">
-
-      {current && locationKey && localizedName &&
-      <TodayCard
-        day={current}
-        localizedName={localizedName}
-        locationKey={locationKey}
-        className="current-condition p-4 flex-1 relative">
-
-        <AddToFavoritesBtn
+    <>
+      {!isLoading
+      ? <div className="day-card-list relative flex-1 flex flex-col justify-between">
+        {current && locationKey && localizedName &&
+        <TodayCard
+          day={current}
           localizedName={localizedName}
           locationKey={locationKey}
-          className="absolute bottom-2 right-2 xl:bottom-4 xl:right-4"/>
+          className="current-condition p-4 flex-1 relative">
 
-      </TodayCard>}
+          <AddToFavoritesBtn
+            localizedName={localizedName}
+            locationKey={locationKey}
+            className="absolute bottom-2 right-2 xl:bottom-4 xl:right-4"/>
 
-      <div className="bg-gray-800 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 xl:py-4">
+        </TodayCard>}
+
+        <div className="bg-gray-800 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 xl:py-4">
         {cityFiveDaysForecast.length > 0 && cityFiveDaysForecast.map((day, i)=> {
           return <DayCard key={i}
                           day={day}/>
         })}
-      </div>
-    </div>
+        </div>
+        </div>
+      : <Loading/> }
+      </>
   );
 };
 
