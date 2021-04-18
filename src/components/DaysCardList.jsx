@@ -1,11 +1,28 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import DayCard from '@/components/DayCard';
 import AddToFavoritesBtn from '@/components/AddToFavoritesBtn';
+import { getCurrentWeatherAsync } from '@/redux/cityForecastSlice';
 
 const DaysCardList = () => {
-  const cityForecast = useSelector((state)=> state.cityForecast.days);
-  const {localizedName, locationKey}  = useSelector((state)=> state.cityForecast);
+  const {
+    localizedName,
+    locationKey,
+    days: cityFiveDaysForecast
+  } = useSelector((state)=> state.cityForecast);
+
+  const dispatch = useDispatch();
+
+  // useEffect(()=> {
+  //  localizedName && console.log('only when name change')
+  // },[localizedName])
+
+  useEffect(()=> {
+    locationKey && dispatch(getCurrentWeatherAsync({
+      locationKey
+    }))
+  },[dispatch,locationKey]);
+
 
   return (
     <div className="flex-1 flex flex-col justify-between">
@@ -16,7 +33,7 @@ const DaysCardList = () => {
       </div>
 
 <div className="bg-gray-800 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 xl:py-4">
-  {cityForecast.length > 0 && cityForecast.map((day, i)=> {
+  {cityFiveDaysForecast.length > 0 && cityFiveDaysForecast.map((day, i)=> {
     return <DayCard key={i}
                     day={day}/>
   })}

@@ -1,6 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {apiKey} from '@/config';
 import accuWeatherApi from '@/client';
+import {getCurrentWeather} from '@/favorites/service';
 
 export const getFiveDayWeatherAsync = createAsyncThunk('cityForecast/getFiveDayWeatherAsync', async({locationKey, localizedName})=> {
   try {
@@ -174,11 +175,19 @@ export const getFiveDayWeatherAsync = createAsyncThunk('cityForecast/getFiveDayW
   }
 });
 
+export const getCurrentWeatherAsync = createAsyncThunk('cityForecasr/getCurrentWeatherAsync', async({locationKey})=> {
+  console.log(locationKey);
+  const [currentWeather] = await getCurrentWeather(locationKey);
+  console.log({currentWeather})
+  return currentWeather;
+});
+
 const cityForecastSlice = createSlice({
   name: 'cityForecast',
   initialState: {
     localizedName: undefined,
     days: [],
+    current: {},
     locationKey: undefined,
     isLoading: false
   },
@@ -189,9 +198,20 @@ const cityForecastSlice = createSlice({
     },
     [getFiveDayWeatherAsync.fulfilled]: (state, action) => {
       return {
+        ...state,
         ...action.payload,
         isLoading: false
       };
+    },
+    [getCurrentWeatherAsync.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [getCurrentWeatherAsync.fulfilled]: (state, action) => {
+        return {
+          ...state,
+          current: action.payload,
+          isLoading: false
+        };
     }
   }
 });
