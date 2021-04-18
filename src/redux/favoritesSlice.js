@@ -16,7 +16,6 @@ const favoritesSlice = createSlice({
       const filteredFav = state.filter(favorite => favorite.locationKey !== action.payload.locationKey);
       localStorage.setItem('favorites', JSON.stringify(filteredFav));
       return filteredFav;
-
     },
   }
 });

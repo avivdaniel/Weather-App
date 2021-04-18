@@ -6,14 +6,16 @@ import {getFiveDayWeatherAsync} from '@/redux/cityForecastSlice';
 import Icon from '@/components/Icon';
 import { useHistory } from "react-router-dom";
 import { path } from '@/home/route';
+import Loading from '@/components/Loading';
 
 const FavoriteCard = ({localizedName, locationKey}) => {
-  const [currentCondition, setCurrentCondition] =useState({});
-
+  const [currentCondition, setCurrentCondition] = useState({});
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const expandCityWeather = () => {
+  const expandCityWeather = (e) => {
+    e.stopPropagation();
     dispatch(getFiveDayWeatherAsync({
       locationKey,
       localizedName
@@ -23,18 +25,24 @@ const FavoriteCard = ({localizedName, locationKey}) => {
 
   useEffect(()=> {
     (async () => {
+      setLoading(true);
       const [currentCondition] = await getCurrentWeather(locationKey);
       setCurrentCondition(currentCondition);
     })();
+    setLoading(false);
   }, [locationKey]);
 
   return (
     <li className="flex flex-col justify-center items-center space-y-4 text-white p-4 rounded-xl shadow-lg shadow-lg bg-gray-800 list-none h-52" onClick={expandCityWeather}>
-      <p>{localizedName}</p>
-      <Icon number={currentCondition?.WeatherIcon}/>
-      <p>{currentCondition?.WeatherText}</p>
-      <p>{currentCondition?.Temperature?.Metric?.Value}</p>
-      <AddToFavoritesBtn localizedName={localizedName} locationKey={locationKey}/>
+      {!loading
+        ? <>
+          <p>{localizedName}</p>
+          <Icon number={currentCondition?.WeatherIcon}/>
+          <p>{currentCondition?.WeatherText}</p>
+          <p>{currentCondition?.Temperature?.Metric?.Value}</p>
+          <AddToFavoritesBtn localizedName={localizedName} locationKey={locationKey}/>
+        </>
+        : <Loading/>}
     </li>
   );
 };

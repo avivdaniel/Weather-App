@@ -13,7 +13,8 @@ const AddToFavoritesBtn = ({locationKey, localizedName, className}) => {
    return favorites && favorites.some(fav => fav.locationKey === locationKey);
   }
 
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation();
     setAnimateBounce(true);
     isFavorite()
     ?  dispatch(removeFromFavorites({
