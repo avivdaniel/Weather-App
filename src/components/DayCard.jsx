@@ -19,7 +19,7 @@ const DayCard = ({day: {Temperature:temperature, Day:day, Date:date, ...props}})
     return weekDayList[weekDay];
   }
 
-  // const { Maximum: {Value: maxTemp}, Minimum: {Value: minTemp}} = temperature;
+  const { Maximum: {Value: maxTemp}, Minimum: {Value: minTemp}} = temperature;
   const { IconPhrase: description, Icon: dayIconNumber } = day;
   // const { Icon: nightIconNumber } = night;
 
@@ -29,9 +29,12 @@ const DayCard = ({day: {Temperature:temperature, Day:day, Date:date, ...props}})
          {formatDayOfWeek(date)}
       </h3>
 
-      <div className="pl-2 flex xl:flex-col xl:items-center xl:pl-0">
+      <div className="pl-2 flex items-center xl:flex-col xl:pl-0">
         <Icon number={dayIconNumber} className="h-6 w-6 xl:h-16 xl:w-16 xl:py-4"/>
-        <span className="ml-4 xl:ml-0 xl:text-xl">{description}</span>
+        <span className="text-center ml-4 xl:ml-0 xl:text-xl">
+          {description}
+          <span className="block xl:ml-0 xl:text-xl">{`${minTemp} - ${maxTemp} °C`}</span>
+        </span>
       </div>
     </div>
   );
