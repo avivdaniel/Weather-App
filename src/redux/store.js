@@ -1,12 +1,15 @@
 import {configureStore} from '@reduxjs/toolkit';
+import {loadFavorites} from '@/favorites/service';
+
 import cityForecastReducer from './cityForecastSlice';
 import favoritesReducer from './favoritesSlice';
-import {loadFavorites} from '@/favorites/service';
+import errorsReducer from './errorsSlice';
 
 
 const reducer = {
   cityForecast: cityForecastReducer,
-  favorites: favoritesReducer
+  favorites: favoritesReducer,
+  errors: errorsReducer
 }
 
 const preloadedState = {

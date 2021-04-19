@@ -1,4 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import {useDispatch} from 'react-redux';
 import {apiKey} from '@/config';
 import accuWeatherApi from '@/client';
 import {getCurrentWeather} from '@/favorites/service';
@@ -6,7 +7,7 @@ import { getFiveDayWeather } from '@/home/service';
 
 export const getFiveDayWeatherAsync = createAsyncThunk('cityForecast/getFiveDayWeatherAsync', async({locationKey, localizedName})=> {
   try {
-    const {DailyForecasts:days} = await getFiveDayWeather(locationKey);
+    const {DailyForecasts:days} = await getFiveDayWeather();
     // const { data: {DailyForecasts: days} } = await accuWeatherApi.get(`/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}&metric=${true}`);
 
     // const  days = [
@@ -172,7 +173,7 @@ export const getFiveDayWeatherAsync = createAsyncThunk('cityForecast/getFiveDayW
        locationKey,
      };
   } catch (err) {
-    throw new Error(err)
+    throw new Error(err?.response?.data?.Message);
   }
 });
 
@@ -576,6 +577,9 @@ const cityForecastSlice = createSlice({
   extraReducers: {
     [getFiveDayWeatherAsync.pending]: (state, action) => {
       state.isLoading = true;
+    },
+    [getFiveDayWeatherAsync.rejected]: (state, action) => {
+      state.isLoading = false;
     },
     [getFiveDayWeatherAsync.fulfilled]: (state, action) => {
       return {
