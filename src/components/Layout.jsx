@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import Navigation from '@/components/Navigation.jsx';
 import { useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
+
+import Navigation from '@/components/Navigation.jsx';
+
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const Layout = ({ children }) => {
-  const { errors } = useSelector(state => state);
+  const { errors } = useSelector((state) => state);
 
   useEffect(() => {
     if (!errors) return;
@@ -17,7 +18,7 @@ const Layout = ({ children }) => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined
+      progress: undefined,
     });
   }, [errors]);
 
