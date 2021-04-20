@@ -1,37 +1,40 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {useDispatch} from 'react-redux';
-import {apiKey} from '@/config';
-import accuWeatherApi from '@/client';
-import {getCurrentWeather} from '@/favorites/service';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getCurrentWeather } from '@/favorites/service';
 import { getFiveDayWeather } from '@/home/service';
 
-export const getFiveDayWeatherAsync = createAsyncThunk('cityForecast/getFiveDayWeatherAsync', async({locationKey, localizedName})=> {
-  try {
-    const {DailyForecasts: days} = await getFiveDayWeather(locationKey);
-    return {
-      localizedName,
-       days,
-       locationKey,
-     };
-  } catch (err) {
-    if (err?.response?.data?.Message) {
-      throw new Error(err?.response?.data?.Message)
+export const getFiveDayWeatherAsync = createAsyncThunk(
+  'cityForecast/getFiveDayWeatherAsync',
+  async ({ locationKey, localizedName }) => {
+    try {
+      const { DailyForecasts: days } = await getFiveDayWeather(locationKey);
+      return {
+        localizedName,
+        days,
+        locationKey,
+      };
+    } catch (err) {
+      if (err?.response?.data?.Message) {
+        throw new Error(err?.response?.data?.Message);
+      }
+      throw err;
     }
-    throw err;
   }
-});
+);
 
-export const getCurrentWeatherAsync = createAsyncThunk('cityForecasr/getCurrentWeatherAsync', async({locationKey})=> {
-  try {
-  const [currentWeather] = await getCurrentWeather(locationKey);
-    return currentWeather;
-  } catch (err) {
-    if (err?.response?.data?.Message) {
-      throw new Error(err?.response?.data?.Message)
+export const getCurrentWeatherAsync = createAsyncThunk(
+  'cityForecasr/getCurrentWeatherAsync',
+  async ({ locationKey }) => {
+    try {
+      const [currentWeather] = await getCurrentWeather(locationKey);
+      return currentWeather;
+    } catch (err) {
+      if (err?.response?.data?.Message) {
+        throw new Error(err?.response?.data?.Message);
+      }
+      throw err;
     }
-    throw err;
   }
-});
+);
 
 const cityForecastSlice = createSlice({
   name: 'cityForecast',
@@ -40,9 +43,9 @@ const cityForecastSlice = createSlice({
     days: [],
     current: {},
     locationKey: undefined,
-    isLoading: false
+    isLoading: false,
   },
-  reducers:{},
+  reducers: {},
   extraReducers: {
     [getFiveDayWeatherAsync.pending]: (state, action) => {
       state.isLoading = true;
@@ -54,21 +57,20 @@ const cityForecastSlice = createSlice({
       return {
         ...state,
         ...action.payload,
-        isLoading: false
+        isLoading: false,
       };
     },
     [getCurrentWeatherAsync.pending]: (state, action) => {
       state.isLoading = true;
     },
     [getCurrentWeatherAsync.fulfilled]: (state, action) => {
-        return {
-          ...state,
-          current: action.payload,
-          isLoading: false
-        };
-    }
-  }
+      return {
+        ...state,
+        current: action.payload,
+        isLoading: false,
+      };
+    },
+  },
 });
 
 export default cityForecastSlice.reducer;
-
