@@ -7,8 +7,11 @@ export const getCityOptions = async (query) => {
   try  {
   const { data } = await accuWeatherApi.get(`/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${query}`)
   return data;
-  } catch (err){
-    console.log('axios error!', err)
+  } catch (err) {
+    if (err && err.message === 'Network Error') {
+      throw new Error('Opps... you may pass the daily limit');
+    }
+    throw err;
   }
 }
 
@@ -21,6 +24,5 @@ export const getFiveDayWeather = async (locationKey) => {
       throw new Error('Opps... you may pass the daily limit');
     }
     throw err;
-
   }
 }

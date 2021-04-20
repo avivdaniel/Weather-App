@@ -7,6 +7,7 @@ import Icon from '@/components/Icon';
 import { useHistory } from "react-router-dom";
 import { path } from '@/home/route';
 import Loading from '@/components/Loading';
+import {cleanErrors, receiveErrors} from '@/redux/errorsSlice';
 
 const FavoriteCard = ({localizedName, locationKey}) => {
   const [currentCondition, setCurrentCondition] = useState({});
@@ -25,9 +26,17 @@ const FavoriteCard = ({localizedName, locationKey}) => {
 
   useEffect(()=> {
     (async () => {
-      setLoading(true);
-      const [currentCondition] = await getCurrentWeather(locationKey);
-      setCurrentCondition(currentCondition);
+      try {
+        dispatch(cleanErrors())
+        setLoading(true);
+        const [currentCondition] = await getCurrentWeather(locationKey);
+        setCurrentCondition(currentCondition);
+      } catch (error) {
+        dispatch(receiveErrors({
+          error: error.message
+        }))
+        console.error(error)
+      }
     })();
     setLoading(false);
   }, [locationKey]);

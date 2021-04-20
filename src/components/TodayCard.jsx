@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '@/utils';
+
 import Icon from '@/components/Icon';
 
 const TodayCard = ({day = {}, localizedName, children, className}) => {

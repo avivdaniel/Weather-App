@@ -6,9 +6,11 @@ export const errorsSlice = createSlice({
   initialState: "",
   reducers: {
     receiveErrors: (state, action) => {
-      return action.payload;
+      return action.payload.error;
     },
-    cleanErrors: () => ''
+    cleanErrors: () => {
+      return '';
+    }
   },
   extraReducers: {
     [getFiveDayWeatherAsync.pending]: () => '',

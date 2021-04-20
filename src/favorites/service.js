@@ -18,6 +18,9 @@ export const getCurrentWeather = async (locationKey) => {
     const {data} = await accuWeatherApi.get(`/currentconditions/v1/${locationKey}?apikey=${apiKey}&details=true`);
     return data;
   } catch (err) {
-    console.error(err);
+    if (err && err.message === 'Network Error') {
+      throw new Error('Opps... you may pass the daily limit');
+    }
+    throw err;
   }
 }
