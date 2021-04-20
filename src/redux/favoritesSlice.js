@@ -7,18 +7,20 @@ const favoritesSlice = createSlice({
     addToFavorites: (state = [], action) => {
       const newFavorite = {
         localizedName: action.payload.localizedName,
-        locationKey: action.payload.locationKey
-      }
+        locationKey: action.payload.locationKey,
+      };
       state.push(newFavorite);
       localStorage.setItem('favorites', JSON.stringify(state));
     },
     removeFromFavorites: (state = [], action) => {
-      const filteredFav = state.filter(favorite => favorite.locationKey !== action.payload.locationKey);
+      const filteredFav = state.filter(
+        (favorite) => favorite.locationKey !== action.payload.locationKey
+      );
       localStorage.setItem('favorites', JSON.stringify(filteredFav));
       return filteredFav;
     },
-  }
+  },
 });
 
-export const {addToFavorites, removeFromFavorites} = favoritesSlice.actions;
+export const { addToFavorites, removeFromFavorites } = favoritesSlice.actions;
 export default favoritesSlice.reducer;
