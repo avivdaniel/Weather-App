@@ -1,4 +1,5 @@
 const HtmlPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 
 const { resolve } = require('path');
@@ -41,6 +42,9 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
     new HtmlPlugin({
       title: 'Weather App',
       favicon: './src/assets/favicon.svg',
