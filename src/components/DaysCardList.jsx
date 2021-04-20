@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { getCurrentWeatherAsync } from '@/redux/cityForecastSlice';
+
 import DayCard from '@/components/DayCard';
 import AddToFavoritesBtn from '@/components/AddToFavoritesBtn';
-import { getCurrentWeatherAsync } from '@/redux/cityForecastSlice';
 import TodayCard from '@/components/TodayCard';
 import Loading from '@/components/Loading';
 
