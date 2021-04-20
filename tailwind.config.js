@@ -11,11 +11,14 @@ module.exports = {
       },
       colors: {
         'light-blue': '#90F7EC',
-        'dark-blue': '#32CCBC'
+        'dark-blue': '#32CCBC',
+      },
+      transitionProperty: {
+        card: 'opacity, padding, max-height',
       },
       animation: {
-        'bounce': 'bounce 1s 1;'
-      }
+        bounce: 'bounce 1s 1;',
+      },
     },
   },
   variants: {
@@ -33,12 +36,17 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
-    plugin(({addUtilities, theme})=> {
-      addUtilities({
-        '.bg-app': {
-          'background-image': `linear-gradient( 135deg, ${theme('colors.light-blue')} 10%, ${theme('colors.dark-blue')} 100%)`
-        }
-      }, ['responsive', 'hover'])
-    })
+    plugin(({ addUtilities, theme }) => {
+      addUtilities(
+        {
+          '.bg-app': {
+            'background-image': `linear-gradient( 135deg, ${theme(
+              'colors.light-blue'
+            )} 10%, ${theme('colors.dark-blue')} 100%)`,
+          },
+        },
+        ['responsive', 'hover']
+      );
+    }),
   ],
 };

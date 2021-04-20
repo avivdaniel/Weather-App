@@ -26,18 +26,18 @@ const DaysCardList = () => {
           locationKey,
         })
       );
-  }, [dispatch, locationKey]);
+  }, [dispatch]);
 
   return (
     <>
       {!isLoading ? (
-        <div className="day-card-list relative flex-1 flex flex-col justify-between">
+        <div className="day-card-list h-full relative flex-1 flex flex-col justify-between">
           {current && locationKey && localizedName && (
             <TodayCard
               day={current}
               localizedName={localizedName}
               locationKey={locationKey}
-              className="current-condition p-4 flex-1 relative"
+              className="current-condition px-4 py-10 flex-1 relative"
             >
               <AddToFavoritesBtn
                 localizedName={localizedName}
@@ -48,12 +48,11 @@ const DaysCardList = () => {
           )}
 
           {cityFiveDaysForecast.length > 0 && (
-            <div className="bg-gray-800 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 xl:py-4">
+            <ul className="bg-gray-800 grid grid-cols-1 xl:grid-cols-5 xl:py-4">
               {cityFiveDaysForecast.map((day, i) => {
                 return <DayCard key={i} day={day} />;
               })}
-              }
-            </div>
+            </ul>
           )}
         </div>
       ) : (
