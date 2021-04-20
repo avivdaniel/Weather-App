@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { getCurrentWeatherAsync } from '@/redux/cityForecastSlice';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import DayCard from '@/components/DayCard';
 import AddToFavoritesBtn from '@/components/AddToFavoritesBtn';
@@ -9,8 +7,6 @@ import TodayCard from '@/components/TodayCard';
 import Loading from '@/components/Loading';
 
 const DaysCardList = () => {
-  const dispatch = useDispatch();
-
   const {
     localizedName,
     locationKey,
@@ -18,15 +14,6 @@ const DaysCardList = () => {
     isLoading,
     days: cityFiveDaysForecast,
   } = useSelector((state) => state.cityForecast);
-
-  useEffect(() => {
-    locationKey &&
-      dispatch(
-        getCurrentWeatherAsync({
-          locationKey,
-        })
-      );
-  }, [dispatch, locationKey]);
 
   return (
     <>

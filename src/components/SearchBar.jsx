@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import debounce from 'lodash.debounce';
 import AsyncSelect from 'react-select/async';
+import { useSelector } from 'react-redux';
 
-import { getFiveDayWeatherAsync } from '@/redux/cityForecastSlice';
+import {
+  getFiveDayWeatherAsync,
+  getCurrentWeatherAsync,
+} from '@/redux/cityForecastSlice';
 import { getCityOptions } from '@/home/service';
 import { cleanErrors, receiveErrors } from '@/redux/errorsSlice';
 
@@ -11,6 +15,8 @@ const DEFAULT_CITY = 'Tel Aviv';
 
 const SearchBar = ({}) => {
   const dispatch = useDispatch();
+
+  const { locationKey } = useSelector((state) => state.cityForecast);
 
   const [selectedCity, setSelectedCity] = useState({});
   const [loading, setLoading] = useState(false);
@@ -20,19 +26,29 @@ const SearchBar = ({}) => {
       try {
         setLoading(true);
         dispatch(cleanErrors());
-        const [defaultCityOption] = await getCityOptions(DEFAULT_CITY);
 
-        setSelectedCity({
-          label: defaultCityOption?.LocalizedName,
-          value: defaultCityOption?.Key,
-        });
+        if (!locationKey) {
+          const [defaultCityOption] = await getCityOptions(DEFAULT_CITY);
 
-        dispatch(
-          getFiveDayWeatherAsync({
-            locationKey: defaultCityOption?.Key,
-            localizedName: defaultCityOption?.LocalizedName,
-          })
-        );
+          setSelectedCity({
+            label: defaultCityOption?.LocalizedName,
+            value: defaultCityOption?.Key,
+          });
+
+          dispatch(
+            getFiveDayWeatherAsync({
+              locationKey: defaultCityOption?.Key,
+              localizedName: defaultCityOption?.LocalizedName,
+            })
+          );
+
+          dispatch(
+            getCurrentWeatherAsync({
+              locationKey: defaultCityOption?.Key,
+            })
+          );
+        }
+        setLoading(false);
       } catch (error) {
         dispatch(
           receiveErrors({
@@ -40,10 +56,10 @@ const SearchBar = ({}) => {
           })
         );
         console.error(error);
+        setLoading(false);
       }
-      setLoading(false);
     })();
-  }, []);
+  }, [dispatch]);
 
   const debounceFetchCityOptions = debounce(async (inputText, cb) => {
     try {
@@ -76,13 +92,17 @@ const SearchBar = ({}) => {
         locationKey: selectedCityOption.value,
       })
     );
+    dispatch(
+      getCurrentWeatherAsync({
+        locationKey: selectedCityOption.value,
+      })
+    );
   };
 
   return (
     <div className="container mx-auto">
       <AsyncSelect
         cacheOptions
-        value={selectedCity}
         className="p-4"
         placeholder="Type something..."
         loadOptions={debounceFetchCityOptions}
