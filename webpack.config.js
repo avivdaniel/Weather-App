@@ -41,7 +41,6 @@ module.exports = {
   },
 
   plugins: [
-    new Dotenv(),
     new HtmlPlugin({
       title: 'Weather App',
       favicon: './src/assets/favicon.svg',

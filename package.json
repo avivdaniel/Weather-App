@@ -1,9 +1,9 @@
 {
-  "name": "react-tailwind-webpack5-boilerplate",
+  "name": "whater-app",
   "version": "1.1.0",
   "main": "index.js",
-  "repository": "https://github.com/alonronin/react-tailwind-webpack5-boilerplate.git",
-  "author": "alonronin <alon@ronin.co.il>",
+  "repository": "",
+  "author": "",
   "license": "Unlicense",
   "scripts": {
     "start": "serve dist -s",

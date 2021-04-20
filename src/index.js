@@ -8,7 +8,6 @@ import App from './App.jsx';
 const root = document.createElement('div');
 document.body.appendChild(root);
 document.body.classList.add('min-h-screen');
-document.body.classList.add('relative');
 document.body.classList.add('w-screen');
 document.body.classList.add('bg-app');
 
