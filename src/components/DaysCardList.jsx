@@ -26,12 +26,12 @@ const DaysCardList = () => {
           locationKey,
         })
       );
-  }, [dispatch]);
+  }, [dispatch, locationKey]);
 
   return (
     <>
       {!isLoading ? (
-        <div className="day-card-list h-full relative flex-1 flex flex-col justify-between">
+        <div className="day-card-list relative flex-1 flex flex-col">
           {current && locationKey && localizedName && (
             <TodayCard
               day={current}

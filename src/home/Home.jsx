@@ -4,7 +4,7 @@ import SearchBar from '@/components/SearchBar';
 
 const Home = () => {
   return (
-    <div className="flex flex-col">
+    <div className="home flex flex-1 flex-col">
       <SearchBar />
       <DaysCardList />
     </div>

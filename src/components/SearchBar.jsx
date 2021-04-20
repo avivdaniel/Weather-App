@@ -20,23 +20,7 @@ const SearchBar = ({}) => {
       try {
         setLoading(true);
         dispatch(cleanErrors());
-        // const [defaultCityOption] = await getCityOptions(DEFAULT_CITY);
-
-        let defaultCityOption = {
-          Version: 1,
-          Key: '215854',
-          Type: 'City',
-          Rank: 31,
-          LocalizedName: 'Tel Aviv',
-          Country: {
-            ID: 'IL',
-            LocalizedName: 'Israel',
-          },
-          AdministrativeArea: {
-            ID: 'TA',
-            LocalizedName: 'Tel Aviv',
-          },
-        };
+        const [defaultCityOption] = await getCityOptions(DEFAULT_CITY);
 
         setSelectedCity({
           label: defaultCityOption?.LocalizedName,
@@ -68,7 +52,7 @@ const SearchBar = ({}) => {
       const data = await getCityOptions(inputText);
       cb(
         data.map((city) => ({
-          label: `${city?.LocalizedName} - ${city?.Country?.LocalizedName}`,
+          label: city?.LocalizedName,
           value: city?.Key,
         }))
       );
@@ -104,7 +88,6 @@ const SearchBar = ({}) => {
         loadOptions={debounceFetchCityOptions}
         onChange={handleChange}
         loading={loading}
-        isDisabled={loading}
       />
     </div>
   );

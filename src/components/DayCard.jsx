@@ -74,7 +74,7 @@ const DayCard = ({
           'xl:text-center',
           open
             ? 'visible py-4 max-h-12 opacity-100'
-            : 'invisible py-0 max-h-0 opacity-0 xl:max-h-12 xl:visible xl:opacity-100 xl:py-4'
+            : 'invisible py-0 max-h-0 opacity-0 xl:max-h-36 xl:visible xl:opacity-100 xl:py-4'
         )}
       >
         <span className="block">

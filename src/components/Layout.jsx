@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Navigation />
-      <div>{children}</div>
+      <div className="layout flex flex-1 flex-col h-full">{children}</div>
       <ToastContainer />
     </>
   );
