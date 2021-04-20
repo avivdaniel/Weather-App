@@ -20,7 +20,23 @@ const SearchBar = ({}) => {
       try {
         setLoading(true);
         dispatch(cleanErrors());
-        const [defaultCityOption] = await getCityOptions(DEFAULT_CITY);
+        // const [defaultCityOption] = await getCityOptions(DEFAULT_CITY);
+
+        let defaultCityOption = {
+          Version: 1,
+          Key: '215854',
+          Type: 'City',
+          Rank: 31,
+          LocalizedName: 'Tel Aviv',
+          Country: {
+            ID: 'IL',
+            LocalizedName: 'Israel',
+          },
+          AdministrativeArea: {
+            ID: 'TA',
+            LocalizedName: 'Tel Aviv',
+          },
+        };
 
         setSelectedCity({
           label: defaultCityOption?.LocalizedName,
