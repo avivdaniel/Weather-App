@@ -3,7 +3,6 @@ Weather App by Aviv Daniel
 
 > React + React Router + Redux Toolkit + Tailwind Css with Webpack 5.
 
-A bare minimum, and as much as un-opinionated as can be, boilerplate so you can start develope and deploy React apps with Tailwind CSS and Webpack 5.
 
 ### Features
 
