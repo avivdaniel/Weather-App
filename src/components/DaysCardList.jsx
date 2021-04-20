@@ -47,12 +47,12 @@ const DaysCardList = () => {
             </TodayCard>
           )}
 
-          <div className="bg-gray-800 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 xl:py-4">
-            {cityFiveDaysForecast.length > 0 &&
-              cityFiveDaysForecast.map((day, i) => {
-                return <DayCard key={i} day={day} />;
-              })}
-          </div>
+          {/*<div className="bg-gray-800 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 xl:py-4">*/}
+          {cityFiveDaysForecast.length > 0 &&
+            cityFiveDaysForecast.map((day, i) => {
+              return <DayCard key={i} day={day} />;
+            })}
+          {/*</div>*/}
         </div>
       ) : (
         <Loading />

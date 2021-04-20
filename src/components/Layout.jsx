@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     if (!errors) return;
     toast.error(errors, {
-      position: 'top-right',
+      position: 'bottom-left',
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Navigation />
-      <div className="min-h-screen bg-app">{children}</div>
+      <div>{children}</div>
       <ToastContainer />
     </>
   );
