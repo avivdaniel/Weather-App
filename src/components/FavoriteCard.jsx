@@ -31,10 +31,11 @@ const FavoriteCard = ({ localizedName, locationKey }) => {
   useEffect(() => {
     (async () => {
       try {
-        dispatch(cleanErrors());
         setLoading(true);
+        dispatch(cleanErrors());
         const [currentCondition] = await getCurrentWeather(locationKey);
         setCurrentCondition(currentCondition);
+        setLoading(false);
       } catch (error) {
         dispatch(
           receiveErrors({
@@ -42,9 +43,9 @@ const FavoriteCard = ({ localizedName, locationKey }) => {
           })
         );
         console.error(error);
+        setLoading(false);
       }
     })();
-    setLoading(false);
   }, [locationKey]);
 
   return (
