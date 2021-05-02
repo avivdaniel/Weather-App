@@ -48,10 +48,16 @@ const cityForecastSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getFiveDayWeatherAsync.pending]: (state, action) => {
-      state.isLoading = true;
+      return {
+        ...state,
+        isLoading: true,
+      };
     },
     [getFiveDayWeatherAsync.rejected]: (state, action) => {
-      state.isLoading = false;
+      return {
+        ...state,
+        isLoading: false,
+      };
     },
     [getFiveDayWeatherAsync.fulfilled]: (state, action) => {
       return {
@@ -61,7 +67,10 @@ const cityForecastSlice = createSlice({
       };
     },
     [getCurrentWeatherAsync.pending]: (state, action) => {
-      state.isLoading = true;
+      return {
+        ...state,
+        isLoading: true,
+      };
     },
     [getCurrentWeatherAsync.fulfilled]: (state, action) => {
       return {
@@ -71,7 +80,10 @@ const cityForecastSlice = createSlice({
       };
     },
     [getCurrentWeatherAsync.rejected]: (state, action) => {
-      state.isLoading = false;
+      return {
+        ...state,
+        isLoading: false,
+      };
     },
   },
 });
