@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { getFiveDayWeatherAsync } from '@/redux/cityForecastSlice';
+import {
+  getCurrentWeatherAsync,
+  getFiveDayWeatherAsync,
+} from '@/redux/cityForecastSlice';
 import { cleanErrors, receiveErrors } from '@/redux/errorsSlice';
 import { getCurrentWeather } from '@/favorites/service';
 import { path } from '@/home/route';
@@ -23,6 +26,11 @@ const FavoriteCard = ({ localizedName, locationKey }) => {
       getFiveDayWeatherAsync({
         locationKey,
         localizedName,
+      })
+    );
+    dispatch(
+      getCurrentWeatherAsync({
+        locationKey,
       })
     );
     history.push(path);
