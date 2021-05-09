@@ -12,6 +12,8 @@ import { getCityOptions } from '@/home/service';
 import { cleanErrors, receiveErrors } from '@/redux/errorsSlice';
 
 const DEFAULT_CITY = 'Tel Aviv';
+const NO_OPTIONS_MSG = 'Sorry, not found any options';
+const NO_OPTION_2_CHARS_MSG = 'Sorry, plase type at least 2 letters';
 
 const SearchBar = ({}) => {
   const dispatch = useDispatch();
@@ -20,6 +22,7 @@ const SearchBar = ({}) => {
 
   const [selectedCity, setSelectedCity] = useState({});
   const [loading, setLoading] = useState(false);
+  const [noOptionMessage, setNoOptionMessage] = useState(NO_OPTIONS_MSG);
 
   useEffect(() => {
     (async () => {
@@ -62,25 +65,31 @@ const SearchBar = ({}) => {
   }, [dispatch]);
 
   const debounceFetchCityOptions = debounce(async (inputText, cb) => {
-    try {
-      dispatch(cleanErrors());
-      setLoading(true);
-      const data = await getCityOptions(inputText);
-      cb(
-        data.map((city) => ({
-          label: city?.LocalizedName,
-          value: city?.Key,
-        }))
-      );
-    } catch (error) {
-      dispatch(
-        receiveErrors({
-          error: error.message,
-        })
-      );
-      console.error(error);
+    if (inputText.length > 1) {
+      try {
+        dispatch(cleanErrors());
+        setLoading(true);
+        const data = await getCityOptions(inputText);
+        cb(
+          data.map((city) => ({
+            label: city?.LocalizedName,
+            value: city?.Key,
+          }))
+        );
+        setNoOptionMessage(NO_OPTIONS_MSG);
+      } catch (error) {
+        dispatch(
+          receiveErrors({
+            error: error.message,
+          })
+        );
+        console.error(error);
+      }
+      setLoading(false);
+    } else {
+      setNoOptionMessage(NO_OPTION_2_CHARS_MSG);
+      cb();
     }
-    setLoading(false);
   }, 1000);
 
   const handleChange = (selectedCityOption) => {
@@ -108,6 +117,7 @@ const SearchBar = ({}) => {
         loadOptions={debounceFetchCityOptions}
         onChange={handleChange}
         loading={loading}
+        noOptionsMessage={() => noOptionMessage}
       />
     </div>
   );
