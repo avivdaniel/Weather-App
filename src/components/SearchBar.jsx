@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import debounce from 'lodash.debounce';
 import AsyncSelect from 'react-select/async';
-import { useSelector } from 'react-redux';
 
 import {
   getFiveDayWeatherAsync,
