@@ -9,7 +9,10 @@ const favoritesSlice = createSlice({
         localizedName: action.payload.localizedName,
         locationKey: action.payload.locationKey,
       };
-      localStorage.setItem('favorites', JSON.stringify(state));
+      localStorage.setItem(
+        'favorites',
+        JSON.stringify([...state, newFavorite])
+      );
       return [...state, newFavorite];
     },
     removeFromFavorites: (state = [], action) => {
