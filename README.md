@@ -2,8 +2,6 @@
 
 🌦️🌈🌤️🌡️
 
-![Weather App](https://i.imgur.com/12345.png)
-
 Welcome to the Weather App, developed by Aviv Daniel! This application is built using React, React Router, Redux Toolkit, and Tailwind CSS with Webpack 5. It allows you to search for the weather forecast and current weather of cities around the world. You can also save your favorite cities, which will be stored in the local storage of your browser.
 
 ## Features
